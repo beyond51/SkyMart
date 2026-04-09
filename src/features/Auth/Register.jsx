@@ -12,7 +12,7 @@ const Register = ({ settoggle }) => {
     reset();
   };
   return (
-    <div className="bg-gray-900 rounded px-3 py-4 w-70 text-white flex flex-col items-center gap-6">
+    <div className="bg-gray-900 rounded-lg px-3 py-4 w-80 text-white flex flex-col items-center gap-6">
       <div className="self-start">
         <h1 className="text-xl">register</h1>
         <p className="self-start">Enter your credential here</p>

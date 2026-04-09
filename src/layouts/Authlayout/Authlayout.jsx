@@ -18,7 +18,7 @@ const Authlayout = () => {
         </>
       ) : (
         <div className="h-screen w-screen flex items-center justify-center ">
-          <Register settoggle={settoggle} />
+          <Register toggle={toggle} settoggle={settoggle} />
         </div>
       )}
     </div>

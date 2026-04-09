@@ -1,22 +1,30 @@
 import { FileInputIcon, Lock, MoveRight } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { setlogin } from "../../Shared/state/Islogin";
 
 const Login = ({ settoggle }) => {
   let { users } = useSelector((store) => store.users);
   let { register, handleSubmit, reset } = useForm();
   let navigate = useNavigate();
+  let dispatch = useDispatch();
   let onsubmit = (e) => {
     let loginuser = users.find(
       (val) => val.email === e.email && val.password === e.password,
     );
     if (loginuser) {
-      navigate("/home");
+      navigate("/main/home");
+      let isloginobj = {
+        islogin: true,
+        user: loginuser.name,
+      };
+      localStorage.setItem("islogin", JSON.stringify(isloginobj));
+      dispatch(setlogin());
     }
   };
   return (
-    <div className="bg-gray-900 rounded px-3 py-4 w-70 text-white flex flex-col items-center gap-6">
+    <div className="bg-gray-900 rounded-lg px-3 py-4 w-70 text-white flex flex-col items-center gap-6">
       <div className="self-start">
         <h1 className="text-xl">Sign-in</h1>
         <p className="self-start">Enter your credential here</p>

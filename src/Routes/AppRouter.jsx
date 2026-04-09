@@ -1,29 +1,42 @@
-import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import MainLayout from "../layouts/MainLayout";
 import Authlayout from "../layouts/Authlayout/Authlayout";
-import Main from "../features/home/components/Main";
-import Products from "../features/PRoduct/Products";
 import About from "../features/about/About";
+import LoginProtected from "./Protected/LoginProtected";
+import Homeprotected from "./Protected/Homeprotected";
+import Home from "../features/home/components/Home";
+import Products from "../features/PRoduct/compoments/Products";
 
 const AppRouter = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Authlayout />,
-    },
-
-    {
-      path: "/home",
-      element: <MainLayout />,
+      element: <Homeprotected />,
       children: [
         {
           path: "",
-          element: <Main />,
+          element: <Authlayout />,
         },
-        { path: "products", element: <Products /> },
-        { path: "about", element: <About /> },
-
+      ],
+    },
+    {
+      path: "/main",
+      element: <LoginProtected />,
+      children: [
+        {
+          element: <MainLayout />,
+          children: [
+            {
+              path: "home",
+              element: <Home />,
+            },
+            {
+              path: "products/:id",
+              element: <Products />,
+            },
+            { path: "about", element: <About /> },
+          ],
+        },
       ],
     },
   ]);
